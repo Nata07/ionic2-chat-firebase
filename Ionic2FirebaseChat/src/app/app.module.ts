@@ -1,4 +1,6 @@
+import { LazyPage } from './../pages/lazy/lazy';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,17 +22,20 @@ const firebaseAppConfig: FirebaseAppConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    LazyPage
   ],
   imports: [
-    BrowserModule,
     AngularFireModule.initializeApp(firebaseAppConfig),
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LazyPage
   ],
   providers: [
     StatusBar,

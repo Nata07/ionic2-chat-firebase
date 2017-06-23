@@ -11,7 +11,6 @@ import { SignupPage } from './../pages/signup/signup';
 
 import {AngularFireModule, FirebaseAppConfig} from 'angularfire2';
 import { UserService } from './../providers/user.service/user.service';
-import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyBZjiSVID8ANk1hantGP5PJCsl_lPSaxUA",
@@ -40,7 +39,6 @@ const firebaseAppConfig: FirebaseAppConfig = {
     SignupPage
   ],
   providers: [
-    AuthServiceProvider,
     StatusBar,
     SplashScreen,
     UserService,

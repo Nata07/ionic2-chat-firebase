@@ -1,3 +1,6 @@
+import { FirebaseAuthState } from 'angularfire2';
+import { User } from './../../model/user.model';
+import { AuthServiceProvider } from './../../providers/auth-service/auth-service';
 import { UserService } from './../../providers/user.service/user.service';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -13,6 +16,7 @@ export class SignupPage {
   signupForm: FormGroup;
   
   constructor(
+    public authService: AuthServiceProvider,
     public formBuilder: FormBuilder,
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -29,14 +33,19 @@ export class SignupPage {
       });
   }
   
-  onSubmit(): void{
-        this.userService.create(this.signupForm.value)
-          .then(() => {
-            console.log('Usuairo cadastrado' );
-            
-          });
-        
+  onSubmit(): void{ 
+    let user: User = this.signupForm.value;
+    
+    this.authService.createAuthUser({
+          email: user.email,
+          password: user.password
+    })
+    .then((authState: FirebaseAuthState) => {
+      this.userService.create(user)
+        .then(() => { 
+          console.log('Usuario cadastrado');
+              
+        });
+    });
   }
-
-
 }

@@ -1,5 +1,4 @@
 import { FirebaseAuthState } from 'angularfire2';
-import { User } from './../../model/user.model';
 import { AuthProvider } from './../../providers/auth/auth';
 import { UserService } from './../../providers/user.service/user.service';
 import { Component } from '@angular/core';
@@ -43,7 +42,7 @@ export class SignupPage {
     }).then((authState: FirebaseAuthState) => {
         
         delete formUser.password;
-        formUser.userId = authState.auth.uid;
+        formUser.uid = authState.auth.uid;
 
         this.userService.create(formUser)
           .then(() => {

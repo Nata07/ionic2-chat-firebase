@@ -11,6 +11,7 @@ import { SignupPage } from './../pages/signup/signup';
 
 import {AngularFireModule, FirebaseAppConfig} from 'angularfire2';
 import { UserService } from './../providers/user.service/user.service';
+import { AuthProvider } from '../providers/auth/auth';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyBZjiSVID8ANk1hantGP5PJCsl_lPSaxUA",
@@ -43,6 +44,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
     SplashScreen,
     UserService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider,
    
   ]
 })

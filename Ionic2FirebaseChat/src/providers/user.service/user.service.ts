@@ -20,8 +20,8 @@ export class UserService {
   }
 
   create(user: User): firebase.Promise<void>{
-      return this.users
-      .push(user);
+      return this.af.database.object(`/users/${user.uid}`)
+        .set(user);
     }
   
 }

@@ -6,6 +6,7 @@ import { NavController, NavParams, Loading, LoadingController, AlertController }
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import 'rxjs/add/operator/first';
 
+import { HomePage } from './../home/home';
 
 @Component({
   selector: 'page-signup',
@@ -57,6 +58,7 @@ export class SignupPage {
           this.userService.create(formUser)
           .then(() => {
             console.log('Usuario cadastrado');
+            this.navCtrl.setRoot(HomePage);
             loading.dismiss();
           }).catch((error: any) => {
             console.log(error);

@@ -2,7 +2,7 @@ import { FirebaseAuthState } from 'angularfire2';
 import { AuthProvider } from './../../providers/auth/auth';
 import { UserService } from './../../providers/user.service/user.service';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 
@@ -17,6 +17,8 @@ export class SignupPage {
   constructor(
     public authService: AuthProvider,
     public formBuilder: FormBuilder,
+    public alertCtrl: AlertController,
+    public loadCtrl: LoadingController,
     public navCtrl: NavController, 
     public navParams: NavParams,
     public userService: UserService
@@ -34,6 +36,7 @@ export class SignupPage {
   
   onSubmit(): void{
     
+    let loading: Loading = this.showLoading();
     let formUser = this.signupForm.value;
 
     this.authService.createAuthUser({
@@ -47,11 +50,32 @@ export class SignupPage {
         this.userService.create(formUser)
           .then(() => {
             console.log('Usuario cadastrado');
+            loading.dismiss();
+          }).catch((error: any) => {
+            console.log(error);
+            loading.dismiss();
+            this.showAlert(error);
           });
 
+    }).catch((error: any) => {  
+            console.log(error);
+            loading.dismiss();
+            this.showAlert(error);
     });
-        
   }
 
+  private showLoading(): Loading{
+    let loading: Loading = this.loadCtrl.create({
+      content: 'Caregando....'  
+    });
+    loading.present();
+    return loading;
+  }
 
+  private showAlert(message: string): void{
+      this.alertCtrl.create({
+        message: message,
+        buttons: ['Ok']
+      }).present();
+  }
 }

@@ -1,3 +1,4 @@
+import { SigninPage } from './../pages/signin/signin';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -25,7 +26,8 @@ const firebaseAppConfig: FirebaseAppConfig = {
   declarations: [
     MyApp,
     HomePage,
-    SignupPage
+    SignupPage,
+    SigninPage
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig),
@@ -37,7 +39,8 @@ const firebaseAppConfig: FirebaseAppConfig = {
   entryComponents: [
     MyApp,
     HomePage,
-    SignupPage
+    SignupPage,
+    SigninPage
   ],
   providers: [
     StatusBar,

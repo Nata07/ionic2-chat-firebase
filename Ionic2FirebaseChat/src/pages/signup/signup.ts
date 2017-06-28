@@ -4,6 +4,7 @@ import { UserService } from './../../providers/user.service/user.service';
 import { Component } from '@angular/core';
 import { NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import 'rxjs/add/operator/first';
 
 
 @Component({
@@ -38,16 +39,22 @@ export class SignupPage {
     
     let loading: Loading = this.showLoading();
     let formUser = this.signupForm.value;
+    let username: string = formUser.username;
 
-    this.authService.createAuthUser({
-      email: formUser.email,
-      password: formUser.password
-    }).then((authState: FirebaseAuthState) => {
+    // verificando resposta se usuario existe
+    this.userService.userExite(username)
+      .first()
+      .subscribe((userExiste: boolean) => {
+          if(!userExiste){
+            this.authService.createAuthUser({
+            email: formUser.email,
+            password: formUser.password
+          }).then((authState: FirebaseAuthState) => {
         
-        delete formUser.password;
-        formUser.uid = authState.auth.uid;
-
-        this.userService.create(formUser)
+          delete formUser.password;
+          formUser.uid = authState.auth.uid;
+  
+          this.userService.create(formUser)
           .then(() => {
             console.log('Usuario cadastrado');
             loading.dismiss();
@@ -57,11 +64,16 @@ export class SignupPage {
             this.showAlert(error);
           });
 
-    }).catch((error: any) => {  
-            console.log(error);
+          }).catch((error: any) => {  
+                  console.log(error);
+                  loading.dismiss();
+                  this.showAlert(error);
+          });
+          }else{
+            this.showAlert(`O username <bold> ${username} </bold> ja esta cadastrado!`);
             loading.dismiss();
-            this.showAlert(error);
-    });
+          }
+      });
   }
 
   private showLoading(): Loading{

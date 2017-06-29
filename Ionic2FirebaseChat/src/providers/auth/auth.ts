@@ -3,13 +3,8 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AngularFireAuth, FirebaseAuthState } from "angularfire2";
 import { BaseService } from "../base.service";
+import { first } from "rxjs/operator/first";
 
-/*
-  Generated class for the AuthProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class AuthProvider extends BaseService {
 
@@ -32,9 +27,19 @@ export class AuthProvider extends BaseService {
       .then((authState: FirebaseAuthState) => {
         return authState != null;
       }) .catch(this.handlePromiseError);
-  }
+    }
 
-  logout(): Promise<void>{
-    return this.auth.logout();      
-  }
+    logout(): Promise<void>{
+      return this.auth.logout();      
+    }
+
+    get autenticated(): Promise<boolean>{
+      return new Promise((resolve, reject) => {
+        this.auth
+        .first()
+        .subscribe((authState: FirebaseAuthState) =>{
+            (authState) ? resolve(true) : reject(false);
+        });
+      });
+    }
 }

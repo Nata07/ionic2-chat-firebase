@@ -10,7 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { SignupPage } from './../pages/signup/signup';
 import { SigninPage } from './../pages/signin/signin';
 
-import { AngularFireModule, FirebaseAppConfig, FirebaseAuthConfig, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
 import { UserService } from './../providers/user.service/user.service';
 import { AuthProvider } from '../providers/auth/auth';
 
@@ -24,11 +24,8 @@ const firebaseAppConfig: FirebaseAppConfig = {
 
   // configurando metodo de autenticação no firebase..
   
-  const firebaseAuthConfig = {
-      provider: AuthProviders.Custom,
-      method: AuthMethods.Password
-  }
 
+  
 @NgModule({
   declarations: [
     MyApp,
@@ -37,7 +34,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
     SigninPage
   ],
   imports: [
-    AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
+    AngularFireModule.initializeApp(firebaseAppConfig),
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp)

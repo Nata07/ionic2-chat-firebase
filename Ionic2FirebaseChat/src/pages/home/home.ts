@@ -1,3 +1,4 @@
+import { AuthProvider } from './../../providers/auth/auth';
 import { UserService } from './../../providers/user.service/user.service';
 import { User } from './../../model/user.model';
 import { FirebaseListObservable } from 'angularfire2';
@@ -14,19 +15,25 @@ export class HomePage {
   users: FirebaseListObservable<User[]>;
 
   constructor(
+    public authService: AuthProvider,
     public navCtrl: NavController,
     public userService: UserService
     ) {
 
   }
 
-  onChatCreate(user: User): void{
-    console.log(`Usuario`, user);
+  ionViewCanEnter(): Promise<boolean>{
+     return this.authService.autenticated;
   }
 
   ionViewDidLoad(){
      this.users = this.userService.users;
   } 
+
+  onChatCreate(user: User): void{
+    console.log(`Usuario`, user);
+  }
+
   onSignup(): void{
     this.navCtrl.push(SignupPage);
   }

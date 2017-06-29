@@ -13,7 +13,8 @@ import { NavController } from 'ionic-angular';
 export class HomePage {
 
   users: FirebaseListObservable<User[]>;
-
+  view: string= 'chats';
+  
   constructor(
     public authService: AuthProvider,
     public navCtrl: NavController,

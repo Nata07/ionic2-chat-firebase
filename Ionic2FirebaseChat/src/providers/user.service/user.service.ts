@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
-import { AngularFire, FirebaseListObservable } from "angularfire2";
+import { AngularFire, FirebaseListObservable, FirebaseAuthState, FirebaseObjectObservable } from "angularfire2";
 
 import { User } from './../../model/user.model';
 import { BaseService } from "../base.service";
@@ -12,6 +12,7 @@ import { BaseService } from "../base.service";
 export class UserService extends BaseService {
   
   users: FirebaseListObservable<User[]>;
+  currentUser: FirebaseObjectObservable<User>;
 
   constructor(
     public af: AngularFire,
@@ -19,11 +20,20 @@ export class UserService extends BaseService {
     ) {
       super();
       this.users = this.af.database.list(`/users`)
+      this.listenAuthState();
+  }
 
+  private listenAuthState(): void{
+    this.af.auth
+      .subscribe((authState: FirebaseAuthState) => {
+        if(authState) { 
+          this.currentUser = this.af.database.object(`/users/${authState.auth.uid }`)
+        }
+      });
   }
   
-  create(user: User): firebase.Promise<void>{
-      return this.af.database.object(`/users/${user.uid}`)
+  create(user: User, uuid: string): firebase.Promise<void>{
+      return this.af.database.object(`/users/${uuid}`)
         .set(user)
         .catch(this.handlePromiseError);
     }

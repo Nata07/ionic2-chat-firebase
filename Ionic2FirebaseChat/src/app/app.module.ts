@@ -1,3 +1,5 @@
+import { ChatPage } from './../pages/chat/chat';
+import { CapitalizePipe } from './../pipes/capitalize.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -9,8 +11,9 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SignupPage } from './../pages/signup/signup';
 import { SigninPage } from './../pages/signin/signin';
+import { CustomLoggedHeaderComponent } from './../components/custom-logged-header/custom-logged-header.component';
 
-import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
+import { AngularFireModule, FirebaseAppConfig, AuthProviders, AuthMethods } from 'angularfire2';
 import { UserService } from './../providers/user.service/user.service';
 import { AuthProvider } from '../providers/auth/auth';
 
@@ -23,18 +26,24 @@ const firebaseAppConfig: FirebaseAppConfig = {
   };
 
   // configurando metodo de autenticação no firebase..
-  
+  const firebaseAuthConfig ={
+      provider: AuthProviders.Custom,
+      method: AuthMethods.Password
+  }
 
   
 @NgModule({
   declarations: [
-    MyApp,
+    CapitalizePipe,
+    CustomLoggedHeaderComponent,
+    ChatPage,
     HomePage,
+    MyApp,
     SignupPage,
-    SigninPage
+    SigninPage,
   ],
   imports: [
-    AngularFireModule.initializeApp(firebaseAppConfig),
+    AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp)
@@ -42,6 +51,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    ChatPage,
     HomePage,
     SignupPage,
     SigninPage

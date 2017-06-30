@@ -1,9 +1,6 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Home Page
-    </ion-title>
-  </ion-navbar>
+  
+  <custom-logged-header [title]="view | capitalize:true"></custom-logged-header>
 
   <ion-toolbar>
     <ion-segment [(ngModel)]= "view" >

@@ -1,10 +1,13 @@
-import { AuthProvider } from './../../providers/auth/auth';
+import { ChatPage } from './../chat/chat';
 import { UserService } from './../../providers/user.service/user.service';
 import { User } from './../../model/user.model';
 import { FirebaseListObservable } from 'angularfire2';
 import { SignupPage } from './../signup/signup';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+
+import { AuthProvider } from './../../providers/auth/auth';
+
 
 @Component({
   selector: 'page-home',
@@ -33,6 +36,10 @@ export class HomePage {
 
   onChatCreate(user: User): void{
     console.log(`Usuario`, user);
+
+    this.navCtrl.push(ChatPage, {
+      recipentUser: user
+    });
   }
 
   onSignup(): void{

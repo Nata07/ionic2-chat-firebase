@@ -78,7 +78,7 @@ export class SigninPage {
           console.log('Autorizado: ', hasAccess)
       })
       .catch(err => {
-          console.log('Nao autorizado....', err)  
+          console.log('Nao autorizado: ', err)  
       });
   }
   

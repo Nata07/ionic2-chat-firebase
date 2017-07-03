@@ -14,8 +14,9 @@ import { SigninPage } from './../pages/signin/signin';
 import { CustomLoggedHeaderComponent } from './../components/custom-logged-header/custom-logged-header.component';
 
 import { AngularFireModule, FirebaseAppConfig, AuthProviders, AuthMethods } from 'angularfire2';
-import { UserService } from './../providers/user.service/user.service';
 import { AuthProvider } from '../providers/auth/auth';
+import { ChatService } from './../providers/chat/chat.service';
+import { UserService } from './../providers/user.service/user.service';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyBZjiSVID8ANk1hantGP5PJCsl_lPSaxUA",
@@ -62,6 +63,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
     UserService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
+    ChatService
    
   ]
 })

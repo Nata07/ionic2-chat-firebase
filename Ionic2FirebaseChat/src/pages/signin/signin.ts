@@ -72,7 +72,7 @@ export class SigninPage {
       }).present();
   }
   
-  onHomePage(): void{
+  onHomePage(): void {
     this.navCtrl.push(HomePage)
       .then((hasAccess: boolean) => {
           console.log('Autorizado: ', hasAccess)

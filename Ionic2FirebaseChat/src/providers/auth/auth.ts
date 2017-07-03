@@ -5,6 +5,7 @@ import { AngularFireAuth, FirebaseAuthState } from "angularfire2";
 import { BaseService } from "../base.service";
 import { first } from "rxjs/operator/first";
 
+
 @Injectable()
 export class AuthProvider extends BaseService {
 

@@ -7,9 +7,9 @@
 
 
 <ion-content padding>
-    <ion-list no lines>
-      <ion-item *ngFor="let m of messsages">
-          {{m}}
+    <ion-list no-lines>
+      <ion-item *ngFor="let m of messages | async">
+          {{m.text}}
       </ion-item>
     </ion-list>
 </ion-content>

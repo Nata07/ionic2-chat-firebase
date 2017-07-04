@@ -1,7 +1,7 @@
+import { FirebaseListObservable } from 'angularfire2';
 import { Chat } from './../../model/chat.model';
 import { ChatService } from './../../providers/chat/chat.service';
 
-import { FirebaseListObservable } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -21,7 +21,9 @@ import firebase  from 'firebase';
 export class HomePage {
 
   users: FirebaseListObservable<User[]>;
+  chats: FirebaseListObservable<Chat[]>;
   view: string= 'chats';
+  
   
   constructor(
     public authService: AuthProvider,
@@ -37,6 +39,7 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
+    this.chats = this.chatService.chats;
      this.users = this.userService.users;
   } 
 
@@ -71,7 +74,22 @@ export class HomePage {
     });
   }
 
+   onChatOpen(chat: Chat): void{
+      
+      let recipientUserId: string = chat.$key;
+      this.userService.getUser(recipientUserId)
+        .first()
+        .subscribe((user: User) => {
+
+          this.navCtrl.push(ChatPage, {
+            recipientUser: user
+          });
+        });
+  }
+
   onSignup(): void{
     this.navCtrl.push(SignupPage);
   }
+
+ 
 }

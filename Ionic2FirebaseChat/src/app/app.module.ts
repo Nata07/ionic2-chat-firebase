@@ -12,11 +12,13 @@ import { HomePage } from '../pages/home/home';
 import { SignupPage } from './../pages/signup/signup';
 import { SigninPage } from './../pages/signin/signin';
 import { CustomLoggedHeaderComponent } from './../components/custom-logged-header/custom-logged-header.component';
+import { MessageBoxComponent } from './../components/message-box/message-box.component';
 
 import { AngularFireModule, FirebaseAppConfig, AuthProviders, AuthMethods } from 'angularfire2';
 import { AuthProvider } from '../providers/auth/auth';
 import { ChatService } from './../providers/chat/chat.service';
 import { UserService } from './../providers/user.service/user.service';
+import { MessageServiceProvider } from './../providers/message/message.service';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyBZjiSVID8ANk1hantGP5PJCsl_lPSaxUA",
@@ -42,6 +44,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
     MyApp,
     SignupPage,
     SigninPage,
+    MessageBoxComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
@@ -63,7 +66,9 @@ const firebaseAppConfig: FirebaseAppConfig = {
     UserService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    ChatService
+    ChatService,
+    MessageServiceProvider
+    
    
   ]
 })

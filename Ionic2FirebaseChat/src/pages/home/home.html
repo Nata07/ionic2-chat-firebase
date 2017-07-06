@@ -1,21 +1,28 @@
 <ion-header>
-  
+
   <custom-logged-header [title]="view | capitalize:true"></custom-logged-header>
 
   <ion-toolbar>
-    <ion-segment [(ngModel)]= "view" >
+    <ion-segment [(ngModel)]="view">
       <ion-segment-button value="chats">
         Chats
       </ion-segment-button>
-      <ion-segment-button value="users"> 
+      <ion-segment-button value="users">
         Users
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
+  </ion-toolbar>
+  
 </ion-header>
 
+
+
 <ion-content padding>
-  
+
   <div [ngSwitch]="view">
     <ion-list *ngSwitchCase="'chats'" no-lines>
       <button ion-item *ngFor="let chat of chats | async" (click)="onChatOpen(chat)">

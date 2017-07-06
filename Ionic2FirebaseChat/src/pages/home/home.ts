@@ -42,6 +42,37 @@ export class HomePage {
     this.chats = this.chatService.chats;
      this.users = this.userService.users;
   } 
+ 
+  filterItems(event: any): void {
+    let searchItem: string = event.target.value;
+
+      this.chats = this.chatService.chats;
+      this.users = this.userService.users;
+
+      if(searchItem){
+        switch(this.view){
+          
+          case 'chats':
+              this.chats = <FirebaseListObservable<Chat[]>>this.chats
+                .map((chats: Chat[]) => {
+                  return chats.filter((chat: Chat) => {
+                      return (chat.title.toLowerCase().indexOf(searchItem.toLocaleLowerCase())> -1);
+                  });
+              });
+          break;
+
+          case 'users':
+          this.users = <FirebaseListObservable<User[]>> this.users
+            .map((users: User[]) => {
+              return users.filter((user: User) => {
+                return (user.name.toLocaleLowerCase().indexOf(searchItem.toLocaleLowerCase()) > -1);
+              });
+            });
+          break;
+        }
+      }
+    
+  }
 
   onChatCreate(recipientUser: User): void {
       

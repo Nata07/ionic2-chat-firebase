@@ -19,6 +19,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { ChatService } from './../providers/chat/chat.service';
 import { UserService } from './../providers/user.service/user.service';
 import { MessageServiceProvider } from './../providers/message/message.service';
+import { UserInfoComponent } from '../components/user-info/user-info';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyBZjiSVID8ANk1hantGP5PJCsl_lPSaxUA",
@@ -45,6 +46,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
     SignupPage,
     SigninPage,
     MessageBoxComponent,
+    UserInfoComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),

@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import { Message } from './../../model/massege.model';
+import { Component, Input } from '@angular/core';
 
 
 @Component({
   selector: 'message-box',
-  templateUrl: 'message-box.component.html'
+  templateUrl: 'message-box.component.html',
+  host: {
+      '[style.justify-content]': '(!isFromSender) ? "flex-start": "flex-end"' 
+  }
 })
 export class MessageBoxComponent {
 
-  text: string;
+    @Input() message: Message;
+    @Input() isFromSender: boolean;
 
   constructor() {
-    console.log('Hello MessageBoxComponent Component');
-    this.text = 'Hello World';
+    
+
   }
 
 }

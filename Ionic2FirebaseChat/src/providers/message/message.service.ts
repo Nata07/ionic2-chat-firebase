@@ -24,7 +24,8 @@ export class MessageServiceProvider extends BaseService {
   getMessages(userId1: string, userId2: string): FirebaseListObservable<Message[]> {
       return <FirebaseListObservable<Message[]>>this.af.database.list(`/messages/${userId1}-${userId2}`, {
         query: {
-          orderByChild: 'timestamp'
+          orderByChild: 'timestamp',
+          limitToLast: 20
         }
     }).catch(this.handleObservableError);
       

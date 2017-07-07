@@ -20,6 +20,7 @@ import { ChatService } from './../providers/chat/chat.service';
 import { UserService } from './../providers/user.service/user.service';
 import { MessageServiceProvider } from './../providers/message/message.service';
 import { UserInfoComponent } from './../components/user-info/user.info.component';
+import { UserMenuComponent } from './../components/user-menu/user-menu.component';
 
 
 const firebaseAppConfig: FirebaseAppConfig = {
@@ -48,6 +49,7 @@ const firebaseAppConfig: FirebaseAppConfig = {
     SigninPage,
     MessageBoxComponent,
     UserInfoComponent,
+    UserMenuComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),

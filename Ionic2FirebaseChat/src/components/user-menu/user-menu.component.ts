@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
 import { AlertController, App, MenuController } from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth/auth';
 import { BaseComponent } from "../base.component";
+import { UserProfilePage } from './../../pages/user-profile/user-profile';
 
 @Component({
   selector: 'user-menu',
@@ -25,6 +26,6 @@ export class UserMenuComponent extends BaseComponent {
 
   onProfile(): void {
     console.log('user profile');
-    
+      this.navCtrl.push(UserProfilePage);
   }
 }

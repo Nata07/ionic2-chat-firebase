@@ -22,6 +22,8 @@ import { UserService } from './../providers/user.service/user.service';
 import { MessageServiceProvider } from './../providers/message/message.service';
 import { UserInfoComponent } from './../components/user-info/user.info.component';
 import { UserMenuComponent } from './../components/user-menu/user-menu.component';
+import { ProgressBarComponent } from './../components/progress-bar/progress-bar.component';
+
 
 
 const firebaseAppConfig: FirebaseAppConfig = {
@@ -51,7 +53,8 @@ const firebaseAppConfig: FirebaseAppConfig = {
     UserProfilePage,
     MessageBoxComponent,
     UserInfoComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    ProgressBarComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),

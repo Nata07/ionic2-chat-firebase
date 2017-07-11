@@ -5,8 +5,20 @@
   </button>
 
   <ion-title>
+    
+   <!-- <ion-item no-lines datail-none *ngIf="user; else titleTemplate">
+      <ion-avatar item-left>
+        <img [src]="user.photo || '../assets/img/no-photo.jpg'" >
+      </ion-avatar> 
+    </ion-item>-->
+    
     {{title}}
+
   </ion-title>
+
+  <!-- <ng-template #titleTemplate>
+    {{title}}
+  </ng-template> -->
   
   <ion-buttons end>
     <button ion-button icon-only (click)="onLogout()">

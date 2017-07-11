@@ -46,5 +46,18 @@ export class ChatService extends BaseService {
     return <FirebaseObjectObservable<Chat>> this.af.database.object(`/chats/${userId1}/${userId2}`)
       .catch(this.handleObservableError);
   }
+  
+  updatePhoto(chat: FirebaseObjectObservable<Chat>, chatPhoto: string, recipientUserPhoto: string): firebase.Promise<boolean> {
+    if(chatPhoto != recipientUserPhoto){
+      return chat.update({
+        photo: recipientUserPhoto
+      }).then(() => {
+        return true;
+
+      }).catch(this.handlePromiseError);
+    }
+
+    return Promise.resolve(false);
+  }
 
 }

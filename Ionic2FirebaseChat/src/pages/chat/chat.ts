@@ -53,12 +53,15 @@ export class ChatPage {
 
         this.chat1 = this.chatService.getDeepChat(this.sender.$key, this.recipient.$key);
         this.chat2 = this.chatService.getDeepChat(this.recipient.$key, this.sender.$key);
-
-        this.chat1
-          .first()
-          .subscribe((chat: Chat) => {
-            this.chatService.updatePhoto(this.chat1, chat.photo, this.recipient.photo);
-          }) 
+        
+        if(this.recipient.photo){
+            this.chat1
+              .first()
+              .subscribe((chat: Chat) => {
+                 this.chatService.updatePhoto(this.chat1, chat.photo, this.recipient.photo);
+              }) 
+        }
+        
 
         let doSubscription = () => {
           this.messages
